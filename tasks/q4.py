@@ -106,7 +106,43 @@ the idea is to traverse the 2-d array in a clockwise snailshell pattern.
 NOTE 2: The 0x0 (empty matrix) is represented as en empty array inside an array [[]]."""
 
 
+def snail(snail_map):
+    try:
+        length = len(snail_map)
+        max = length - 1
+        min = 0
+        result = []
+
+        for i in range(length // 2):
+            temp1 = []
+            temp2 = []
+            temp3 = []
+            temp4 = []
+            for i in range(min, max):
+                temp1.append(snail_map[min][i])
+                temp2.append(snail_map[i][max])
+            for i in range(max, min, -1):
+                temp3.append(snail_map[max][i])
+                temp4.append(snail_map[i][min])
+
+            result += temp1
+            result += temp2
+            result += temp3
+            result += temp4
+            min += 1
+            max -= 1
+        if min == max:
+            result.append(snail_map[min][max])
+        return result
+    except:
+        return snail_map[0]
+
 
 if __name__ == '__main__':
     print(mix("Sadus:cpms>orqn3zecwGvnznSgacs",
               "MynwdKizfd$lvse+gnbaGydxyXzayp"))
+
+    array = [[1, 2, 3],
+             [8, 9, 4],
+             [7, 6, 5]]
+    print(snail(array))
